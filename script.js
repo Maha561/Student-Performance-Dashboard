@@ -102,13 +102,12 @@ function deleteRow(button) {
 
     const row = button.parentNode.parentNode;
 
-    const name = row.children[0].textContent;
+    const index = row.rowIndex-1;
     const status = row.children[3].textContent;
 
-    students = students.filter(function(student) {
-        return student.name !== name;
-    });
+    students.splice(index,1);
 
+    
     localStorage.setItem("students", JSON.stringify(students));
 
     if (status === "Pass") {
