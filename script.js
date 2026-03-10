@@ -6,19 +6,17 @@ let failed = 0;
 // Array to store student data
 let students = [];
 
-// Get form and table elements from HTML
+// Get form and table elements
 const form = document.getElementById("studentForm");
 const table = document.getElementById("studentTable");
 
-// Load saved students from browser localStorage when the page opens
+// Load students from localStorage
 const savedStudents = JSON.parse(localStorage.getItem("students"));
 
 if (savedStudents) {
 
-    // Assign saved data back to the students array
     students = savedStudents;
 
-    // Loop through each student and display in the table
     students.forEach(function(student) {
 
         const row = `
@@ -31,10 +29,8 @@ if (savedStudents) {
         </tr>
         `;
 
-        // Add the row to the table
         table.innerHTML += row;
 
-        // Update dashboard counters
         total++;
 
         if (student.status === "Pass") {
@@ -45,27 +41,23 @@ if (savedStudents) {
 
     });
 
-    // Display updated counters in the dashboard
     document.getElementById("totalStudents").textContent = total;
     document.getElementById("passedStudents").textContent = passed;
     document.getElementById("failedStudents").textContent = failed;
 }
 
-// Event listener for form submission (Add Student)
+
+// Add Student
 form.addEventListener("submit", function(event) {
 
-    // Prevent page reload
     event.preventDefault();
 
-    // Get input values from the form
     const name = document.getElementById("name").value;
     const dept = document.getElementById("dept").value;
     const marks = Number(document.getElementById("marks").value);
 
-    // Determine pass or fail based on marks
     let status = marks >= 50 ? "Pass" : "Fail";
 
-    // Create a student object
     const student = {
         name: name,
         dept: dept,
@@ -73,13 +65,10 @@ form.addEventListener("submit", function(event) {
         status: status
     };
 
-    // Store the student object in the array
     students.push(student);
 
-    // Save the updated array to localStorage
     localStorage.setItem("students", JSON.stringify(students));
 
-    // Update dashboard counters
     total++;
 
     if (status === "Pass") {
@@ -88,12 +77,10 @@ form.addEventListener("submit", function(event) {
         failed++;
     }
 
-    // Display updated counters
     document.getElementById("totalStudents").textContent = total;
     document.getElementById("passedStudents").textContent = passed;
     document.getElementById("failedStudents").textContent = failed;
 
-    // Create a new table row for the student
     const row = `
     <tr>
         <td>${name}</td>
@@ -104,34 +91,26 @@ form.addEventListener("submit", function(event) {
     </tr>
     `;
 
-    // Add the row to the table
     table.innerHTML += row;
 
-    // Reset form fields
     form.reset();
 });
 
-// Function to delete a student row from the table
+
+// Delete Student
 function deleteRow(button) {
 
-    // Get the table row of the clicked delete button
     const row = button.parentNode.parentNode;
 
-    // Get student name and status from the row
     const name = row.children[0].textContent;
-
-    // Get the pass/fail status from the row
     const status = row.children[3].textContent;
 
-    // remove that student from array
     students = students.filter(function(student) {
         return student.name !== name;
     });
 
-    // update localStorage
     localStorage.setItem("students", JSON.stringify(students));
 
-    // Update dashboard counters
     if (status === "Pass") {
         passed--;
     } else {
@@ -140,11 +119,30 @@ function deleteRow(button) {
 
     total--;
 
-    // Update dashboard display
     document.getElementById("totalStudents").textContent = total;
     document.getElementById("passedStudents").textContent = passed;
     document.getElementById("failedStudents").textContent = failed;
 
-    // Remove the row from the table
     row.remove();
+}
+
+
+// Department Filter
+function filterDepartment() {
+
+    const filter = document.getElementById("deptFilter").value;
+
+    const rows = table.getElementsByTagName("tr");
+
+    for (let i = 0; i < rows.length; i++) {
+
+        const dept = rows[i].children[1].textContent;
+
+        if (filter === "All" || dept === filter) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+
+    }
 }

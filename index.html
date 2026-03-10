@@ -58,7 +58,17 @@
     <button type="submit">Add Student</button>
 
 </form>
+  <br>
+  
+  
+<label>Filter by Department:</label>
 
+<select id="deptFilter" onchange="filterDepartment()">
+    <option value="All">All</option>
+    <option value="CSE">CSE</option>
+    <option value="IT">IT</option>
+    <option value="ECE">ECE</option>
+</select>
     <h2>Student List</h2>
 
 <table border="1">
