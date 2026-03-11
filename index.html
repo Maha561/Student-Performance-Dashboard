@@ -1,93 +1,128 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student-Performance-DashBoard</title>
 
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Student Performance Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
 
-    <center>
-        <h1>Student-Performance-DashBoard</h1>
-    </center>
-    <h2>Dashboard</h2>
+<h1>Student Performance Dashboard</h1>
+  
+  <br>
+    <button style="margin-left: 50px;" id="lightBtn"> Light</button>
+    <Button id="darkBtn">
+        Dark
+        
+    </Button>
+<br>
 
-    <div>
 
-        <div>
-            <h3>Total Students</h3>
-            <p id="totalStudents">0</p>
-        </div>
+<!-- Dashboard Section -->
 
-        <div>
-            <h3>Passed Students</h3>
-            <p id="passedStudents">0</p>
-        </div>
+<h2>Dashboard</h2>
 
-        <div>
-            <h3>Failed Students</h3>
-            <p id="failedStudents">0</p>
-        </div>
+<div class="dashboard">
 
-    </div>
+<div class="card">
+<h3>Total Students</h3>
+<p id="totalStudents">0</p>
+</div>
 
-    <h2>Add Student</h2>
+<div class="card">
+<h3>Passed Students</h3>
+<p id="passedStudents">0</p>
+</div>
+
+<div class="card">
+<h3>Failed Students</h3>
+<p id="failedStudents">0</p>
+</div>
+
+</div>
+
+
+<!-- Add Student Form -->
+
+<h2>Add Student</h2>
 
 <form id="studentForm">
 
-    <label>Name:</label>
-    <input type="text" id="name" placeholder="Enter student name" required>
+<label>Name</label>
+<input type="text" id="name" placeholder="Enter student name" required>
 
-    <br><br>
+<br><br>
 
-    <label>Department:</label>
-    <input type="text" id="dept" placeholder="Enter department" required>
+<label>Department</label>
+<input type="text" id="dept" placeholder="Enter department" required>
 
-    <br><br>
+<br><br>
 
-    <label>Marks:</label>
-    <input type="number" id="marks" placeholder="Enter marks" required>
+<label>Marks</label>
+<input type="number" id="marks" placeholder="Enter marks" required>
 
-    <br><br>
+<br><br>
 
-    <button type="submit">Add Student</button>
+<button type="submit">Add Student</button>
 
 </form>
-  <br>
-  
-  
-<label>Filter by Department:</label>
+
+
+<!-- Filter Section -->
+
+<center>
+
+<label><b>Filter by Department</b></label>
 
 <select id="deptFilter" onchange="filterDepartment()">
-    <option value="All">All</option>
-    <option value="CSE">CSE</option>
-    <option value="IT">IT</option>
-    <option value="ECE">ECE</option>
+
+<option value="All">All</option>
+<option value="CSE">CSE</option>
+<option value="IT">IT</option>
+<option value="ECE">ECE</option>
+
 </select>
-    <h2>Student List</h2>
+
+</center>
+
+
+<br>
+
+
+<!-- Student Table -->
+
+<h2>Student List</h2>
 
 <table border="1">
 
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Department</th>
-            <th>Marks</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
+<thead>
 
-    <tbody id="studentTable">
-        
-    </tbody>
+<tr>
+<th>Name</th>
+<th>Department</th>
+<th>Marks</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="studentTable">
+
+</tbody>
 
 </table>
+
+
 <script src="script.js"></script>
+
 </body>
+
 </html>

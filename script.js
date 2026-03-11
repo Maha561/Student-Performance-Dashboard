@@ -1,147 +1,159 @@
-// Variables to track dashboard statistics
+// Dashboard counters
 let total = 0;
 let passed = 0;
 let failed = 0;
 
-// Array to store student data
+// Student data array
 let students = [];
 
-// Get form and table elements
 const form = document.getElementById("studentForm");
 const table = document.getElementById("studentTable");
 
-// Load students from localStorage
+// Load data from localStorage
 const savedStudents = JSON.parse(localStorage.getItem("students"));
 
-if (savedStudents) {
+if(savedStudents){
 
-    students = savedStudents;
+students = savedStudents;
 
-    students.forEach(function(student) {
+students.forEach(function(student){
 
-        const row = `
-        <tr>
-            <td>${student.name}</td>
-            <td>${student.dept}</td>
-            <td>${student.marks}</td>
-            <td>${student.status}</td>
-            <td><button onclick="deleteRow(this)">Delete</button></td>
-        </tr>
-        `;
+addRow(student);
 
-        table.innerHTML += row;
+});
 
-        total++;
+updateDashboard();
 
-        if (student.status === "Pass") {
-            passed++;
-        } else {
-            failed++;
-        }
-
-    });
-
-    document.getElementById("totalStudents").textContent = total;
-    document.getElementById("passedStudents").textContent = passed;
-    document.getElementById("failedStudents").textContent = failed;
 }
 
 
-// Add Student
-form.addEventListener("submit", function(event) {
+// Dark / Light Mode Buttons
 
-    event.preventDefault();
+let lightBtn = document.getElementById("lightBtn");
+let darkBtn = document.getElementById("darkBtn");
 
-    const name = document.getElementById("name").value;
-    const dept = document.getElementById("dept").value;
-    const marks = Number(document.getElementById("marks").value);
+darkBtn.addEventListener("click",function(){
 
-    let status = marks >= 50 ? "Pass" : "Fail";
+document.body.classList.add("dark-mode");
 
-    const student = {
-        name: name,
-        dept: dept,
-        marks: marks,
-        status: status
-    };
+});
 
-    students.push(student);
+lightBtn.addEventListener("click",function(){
 
-    localStorage.setItem("students", JSON.stringify(students));
+document.body.classList.remove("dark-mode");
 
-    total++;
-
-    if (status === "Pass") {
-        passed++;
-    } else {
-        failed++;
-    }
-
-    document.getElementById("totalStudents").textContent = total;
-    document.getElementById("passedStudents").textContent = passed;
-    document.getElementById("failedStudents").textContent = failed;
-
-    const row = `
-    <tr>
-        <td>${name}</td>
-        <td>${dept}</td>
-        <td>${marks}</td>
-        <td>${status}</td>
-        <td><button onclick="deleteRow(this)">Delete</button></td>
-    </tr>
-    `;
-
-    table.innerHTML += row;
-
-    form.reset();
 });
 
 
+// Add Student
+
+form.addEventListener("submit",function(event){
+
+event.preventDefault();
+
+const name = document.getElementById("name").value;
+const dept = document.getElementById("dept").value;
+const marks = Number(document.getElementById("marks").value);
+
+let status = marks >= 50 ? "Pass" : "Fail";
+
+const student = {
+name,
+dept,
+marks,
+status
+};
+
+students.push(student);
+
+localStorage.setItem("students",JSON.stringify(students));
+
+addRow(student);
+
+updateDashboard();
+
+form.reset();
+
+});
+
+
+// Create Table Row
+
+function addRow(student){
+
+const row = `
+<tr>
+<td>${student.name}</td>
+<td>${student.dept}</td>
+<td>${student.marks}</td>
+<td>${student.status}</td>
+<td><button onclick="deleteRow(this)">Delete</button></td>
+</tr>
+`;
+
+table.innerHTML += row;
+
+}
+
+
+// Update Dashboard
+
+function updateDashboard(){
+
+total = students.length;
+
+passed = students.filter(s => s.status === "Pass").length;
+
+failed = students.filter(s => s.status === "Fail").length;
+
+document.getElementById("totalStudents").textContent = total;
+document.getElementById("passedStudents").textContent = passed;
+document.getElementById("failedStudents").textContent = failed;
+
+}
+
+
 // Delete Student
-function deleteRow(button) {
 
-    const row = button.parentNode.parentNode;
+function deleteRow(button){
 
-    const index = row.rowIndex-1;
-    const status = row.children[3].textContent;
+const row = button.parentNode.parentNode;
 
-    students.splice(index,1);
+const index = row.rowIndex - 1;
 
-    
-    localStorage.setItem("students", JSON.stringify(students));
+students.splice(index,1);
 
-    if (status === "Pass") {
-        passed--;
-    } else {
-        failed--;
-    }
+localStorage.setItem("students",JSON.stringify(students));
 
-    total--;
+row.remove();
 
-    document.getElementById("totalStudents").textContent = total;
-    document.getElementById("passedStudents").textContent = passed;
-    document.getElementById("failedStudents").textContent = failed;
+updateDashboard();
 
-    row.remove();
 }
 
 
 // Department Filter
-function filterDepartment() {
 
-    const filter = document.getElementById("deptFilter").value;
+function filterDepartment(){
 
-    const rows = table.getElementsByTagName("tr");
+const filter = document.getElementById("deptFilter").value;
 
-    for (let i = 0; i < rows.length; i++) {
+const rows = table.getElementsByTagName("tr");
 
-        const dept = rows[i].children[1].textContent;
+for(let i=0;i<rows.length;i++){
 
-        if (filter === "All" || dept === filter) {
-            rows[i].style.display = "";
-        } else {
-            rows[i].style.display = "none";
-        }
+const dept = rows[i].children[1].textContent;
 
-    }
+if(filter === "All" || dept === filter){
+
+rows[i].style.display = "";
+
+}else{
+
+rows[i].style.display = "none";
+
+}
+
+}
+
 }
