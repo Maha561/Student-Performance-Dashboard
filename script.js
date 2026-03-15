@@ -1,15 +1,14 @@
-// Dashboard counters
+let students = [];
+
 let total = 0;
 let passed = 0;
 let failed = 0;
 
-// Student data array
-let students = [];
-
 const form = document.getElementById("studentForm");
 const table = document.getElementById("studentTable");
 
-// Load data from localStorage
+/* Load LocalStorage */
+
 const savedStudents = JSON.parse(localStorage.getItem("students"));
 
 if(savedStudents){
@@ -26,11 +25,10 @@ updateDashboard();
 
 }
 
+/* Dark Mode */
 
-// Dark / Light Mode Buttons
-
-let lightBtn = document.getElementById("lightBtn");
 let darkBtn = document.getElementById("darkBtn");
+let lightBtn = document.getElementById("lightBtn");
 
 darkBtn.addEventListener("click",function(){
 
@@ -44,8 +42,7 @@ document.body.classList.remove("dark-mode");
 
 });
 
-
-// Add Student
+/* Add Student */
 
 form.addEventListener("submit",function(event){
 
@@ -76,8 +73,7 @@ form.reset();
 
 });
 
-
-// Create Table Row
+/* Add Row */
 
 function addRow(student){
 
@@ -95,8 +91,7 @@ table.innerHTML += row;
 
 }
 
-
-// Update Dashboard
+/* Dashboard Update */
 
 function updateDashboard(){
 
@@ -112,8 +107,7 @@ document.getElementById("failedStudents").textContent = failed;
 
 }
 
-
-// Delete Student
+/* Delete Student */
 
 function deleteRow(button){
 
@@ -131,8 +125,7 @@ updateDashboard();
 
 }
 
-
-// Department Filter
+/* Department Filter */
 
 function filterDepartment(){
 
@@ -145,6 +138,32 @@ for(let i=0;i<rows.length;i++){
 const dept = rows[i].children[1].textContent;
 
 if(filter === "All" || dept === filter){
+
+rows[i].style.display = "";
+
+}else{
+
+rows[i].style.display = "none";
+
+}
+
+}
+
+}
+
+/* Search */
+
+function searchStudent(){
+
+const input = document.getElementById("searchInput").value.toLowerCase();
+
+const rows = table.getElementsByTagName("tr");
+
+for(let i=0;i<rows.length;i++){
+
+const name = rows[i].children[0].textContent.toLowerCase();
+
+if(name.includes(input)){
 
 rows[i].style.display = "";
 

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,17 +16,13 @@
 <body>
 
 <h1>Student Performance Dashboard</h1>
-  
-  <br>
-    <button style="margin-left: 50px;" id="lightBtn"> Light</button>
-    <Button id="darkBtn">
-        Dark
-        
-    </Button>
-<br>
 
+<button id="lightBtn">Light</button>
+<button id="darkBtn">Dark</button>
 
-<!-- Dashboard Section -->
+<br><br>
+
+<!-- Dashboard -->
 
 <h2>Dashboard</h2>
 
@@ -48,34 +45,28 @@
 
 </div>
 
-
-<!-- Add Student Form -->
+<!-- Add Student -->
 
 <h2>Add Student</h2>
 
 <form id="studentForm">
 
 <label>Name</label>
-<input type="text" id="name" placeholder="Enter student name" required>
-
-<br><br>
+<input type="text" id="name" required>
 
 <label>Department</label>
-<input type="text" id="dept" placeholder="Enter department" required>
-
-<br><br>
+<input type="text" id="dept" required>
 
 <label>Marks</label>
-<input type="number" id="marks" placeholder="Enter marks" required>
-
-<br><br>
+<input type="number" id="marks" required>
 
 <button type="submit">Add Student</button>
 
 </form>
 
+<br>
 
-<!-- Filter Section -->
+<!-- Department Filter -->
 
 <center>
 
@@ -92,15 +83,23 @@
 
 </center>
 
-
 <br>
 
+<!-- Search -->
+
+<div class="searchBox">
+
+<label><b>Search Student</b></label>
+
+<input type="text" id="searchInput" placeholder="Enter name" onkeyup="searchStudent()">
+
+</div>
 
 <!-- Student Table -->
 
 <h2>Student List</h2>
 
-<table border="1">
+<table>
 
 <thead>
 
@@ -119,7 +118,6 @@
 </tbody>
 
 </table>
-
 
 <script src="script.js"></script>
 
