@@ -1,3 +1,13 @@
+// ================= LOGIN PROTECTION =================
+
+const isLoggedIn = localStorage.getItem("loggedIn");
+
+if(isLoggedIn !== "true"){
+    window.location.href = "login.html";
+}
+
+// ================= VARIABLES =================
+
 let students = [];
 
 let total = 0;
@@ -7,172 +17,150 @@ let failed = 0;
 const form = document.getElementById("studentForm");
 const table = document.getElementById("studentTable");
 
-/* Load LocalStorage */
+// ================= LOAD DATA =================
 
 const savedStudents = JSON.parse(localStorage.getItem("students"));
 
 if(savedStudents){
-
-students = savedStudents;
-
-students.forEach(function(student){
-
-addRow(student);
-
-});
-
-updateDashboard();
-
+    students = savedStudents;
+    renderTable();
+    updateDashboard();
 }
 
-/* Dark Mode */
+// ================= DARK MODE =================
 
 let darkBtn = document.getElementById("darkBtn");
 let lightBtn = document.getElementById("lightBtn");
 
-darkBtn.addEventListener("click",function(){
-
-document.body.classList.add("dark-mode");
-
+darkBtn.addEventListener("click", function(){
+    document.body.classList.add("dark-mode");
 });
 
-lightBtn.addEventListener("click",function(){
-
-document.body.classList.remove("dark-mode");
-
+lightBtn.addEventListener("click", function(){
+    document.body.classList.remove("dark-mode");
 });
 
-/* Add Student */
+// ================= ADD STUDENT =================
 
-form.addEventListener("submit",function(event){
+form.addEventListener("submit", function(event){
 
-event.preventDefault();
+    event.preventDefault();
 
-const name = document.getElementById("name").value;
-const dept = document.getElementById("dept").value;
-const marks = Number(document.getElementById("marks").value);
+    const name = document.getElementById("name").value;
+    const dept = document.getElementById("dept").value;
+    const marks = Number(document.getElementById("marks").value);
 
-let status = marks >= 50 ? "Pass" : "Fail";
+    let status = marks >= 50 ? "Pass" : "Fail";
 
-const student = {
-name,
-dept,
-marks,
-status
-};
+    const student = { name, dept, marks, status };
 
-students.push(student);
+    students.push(student);
 
-localStorage.setItem("students",JSON.stringify(students));
+    localStorage.setItem("students", JSON.stringify(students));
 
-addRow(student);
+    renderTable();
+    updateDashboard();
 
-updateDashboard();
-
-form.reset();
-
+    form.reset();
 });
 
-/* Add Row */
+// ================= RENDER TABLE =================
 
-function addRow(student){
+function renderTable(){
 
-const row = `
-<tr>
-<td>${student.name}</td>
-<td>${student.dept}</td>
-<td>${student.marks}</td>
-<td>${student.status}</td>
-<td><button onclick="deleteRow(this)">Delete</button></td>
-</tr>
-`;
+    table.innerHTML = "";
 
-table.innerHTML += row;
+    students.forEach(function(student, index){
 
+        const row = `
+        <tr>
+            <td>${student.name}</td>
+            <td>${student.dept}</td>
+            <td>${student.marks}</td>
+            <td>${student.status}</td>
+            <td>
+                <button onclick="deleteRow(${index})">Delete</button>
+            </td>
+        </tr>
+        `;
+
+        table.innerHTML += row;
+
+    });
 }
 
-/* Dashboard Update */
+// ================= UPDATE DASHBOARD =================
 
 function updateDashboard(){
 
-total = students.length;
+    total = students.length;
 
-passed = students.filter(s => s.status === "Pass").length;
+    passed = students.filter(s => s.status === "Pass").length;
 
-failed = students.filter(s => s.status === "Fail").length;
+    failed = students.filter(s => s.status === "Fail").length;
 
-document.getElementById("totalStudents").textContent = total;
-document.getElementById("passedStudents").textContent = passed;
-document.getElementById("failedStudents").textContent = failed;
-
+    document.getElementById("totalStudents").textContent = total;
+    document.getElementById("passedStudents").textContent = passed;
+    document.getElementById("failedStudents").textContent = failed;
 }
 
-/* Delete Student */
+// ================= DELETE =================
 
-function deleteRow(button){
+function deleteRow(index){
 
-const row = button.parentNode.parentNode;
+    students.splice(index, 1);
 
-const index = row.rowIndex - 1;
+    localStorage.setItem("students", JSON.stringify(students));
 
-students.splice(index,1);
-
-localStorage.setItem("students",JSON.stringify(students));
-
-row.remove();
-
-updateDashboard();
-
+    renderTable();
+    updateDashboard();
 }
 
-/* Department Filter */
+// ================= FILTER =================
 
 function filterDepartment(){
 
-const filter = document.getElementById("deptFilter").value;
+    const filter = document.getElementById("deptFilter").value;
 
-const rows = table.getElementsByTagName("tr");
+    const rows = table.getElementsByTagName("tr");
 
-for(let i=0;i<rows.length;i++){
+    for(let i = 0; i < rows.length; i++){
 
-const dept = rows[i].children[1].textContent;
+        const dept = rows[i].children[1].textContent;
 
-if(filter === "All" || dept === filter){
+        if(filter === "All" || dept === filter){
+            rows[i].style.display = "";
+        }else{
+            rows[i].style.display = "none";
+        }
 
-rows[i].style.display = "";
-
-}else{
-
-rows[i].style.display = "none";
-
+    }
 }
 
-}
-
-}
-
-/* Search */
+// ================= SEARCH =================
 
 function searchStudent(){
 
-const input = document.getElementById("searchInput").value.toLowerCase();
+    const input = document.getElementById("searchInput").value.toLowerCase();
 
-const rows = table.getElementsByTagName("tr");
+    const rows = table.getElementsByTagName("tr");
 
-for(let i=0;i<rows.length;i++){
+    for(let i = 0; i < rows.length; i++){
 
-const name = rows[i].children[0].textContent.toLowerCase();
+        const name = rows[i].children[0].textContent.toLowerCase();
 
-if(name.includes(input)){
+        if(name.includes(input)){
+            rows[i].style.display = "";
+        }else{
+            rows[i].style.display = "none";
+        }
 
-rows[i].style.display = "";
-
-}else{
-
-rows[i].style.display = "none";
-
+    }
 }
 
-}
+// ================= LOGOUT =================
 
+function logout(){
+    localStorage.removeItem("loggedIn");
+    window.location.href = "login.html";
 }

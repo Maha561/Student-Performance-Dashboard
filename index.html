@@ -1,9 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,8 +15,19 @@
 
 <h1>Student Performance Dashboard</h1>
 
-<button id="lightBtn">Light</button>
-<button id="darkBtn">Dark</button>
+<!-- Top Buttons -->
+
+<div style="margin-bottom:20px;">
+    <button id="lightBtn">Light</button>
+    <button id="darkBtn">Dark</button>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<!-- Add Student Button -->
+
+<a href="add.html">
+    <button>Add Student</button>
+</a>
 
 <br><br>
 
@@ -45,40 +54,17 @@
 
 </div>
 
-<!-- Add Student -->
-
-<h2>Add Student</h2>
-
-<form id="studentForm">
-
-<label>Name</label>
-<input type="text" id="name" required>
-
-<label>Department</label>
-<input type="text" id="dept" required>
-
-<label>Marks</label>
-<input type="number" id="marks" required>
-
-<button type="submit">Add Student</button>
-
-</form>
-
-<br>
-
-<!-- Department Filter -->
+<!-- Filter -->
 
 <center>
 
 <label><b>Filter by Department</b></label>
 
 <select id="deptFilter" onchange="filterDepartment()">
-
 <option value="All">All</option>
 <option value="CSE">CSE</option>
 <option value="IT">IT</option>
 <option value="ECE">ECE</option>
-
 </select>
 
 </center>
@@ -95,14 +81,13 @@
 
 </div>
 
-<!-- Student Table -->
+<!-- Table -->
 
 <h2>Student List</h2>
 
 <table>
 
 <thead>
-
 <tr>
 <th>Name</th>
 <th>Department</th>
@@ -110,11 +95,9 @@
 <th>Status</th>
 <th>Action</th>
 </tr>
-
 </thead>
 
 <tbody id="studentTable">
-
 </tbody>
 
 </table>

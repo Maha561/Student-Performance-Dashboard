@@ -124,3 +124,105 @@ text-align:center;
 color:red;
 text-align:center;
 }
+/* Login Page */
+
+.loginBox{
+width:320px;
+margin:100px auto;
+padding:30px;
+background:white;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.15);
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.loginBox h2{
+text-align:center;
+margin-bottom:10px;
+}
+
+/* Inputs */
+
+.loginBox input{
+padding:10px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:14px;
+}
+
+/* Button */
+
+.loginBox button{
+padding:10px;
+border:none;
+background:#007bff;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-size:15px;
+}
+
+.loginBox button:hover{
+background:#0056b3;
+}
+
+/* Error Message */
+
+#errorMsg{
+color:red;
+text-align:center;
+margin-top:10px;
+}
+/* Login Page */
+
+.loginBox{
+width:320px;
+margin:100px auto;
+padding:30px;
+background:white;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.15);
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.loginBox h2{
+text-align:center;
+margin-bottom:10px;
+}
+
+/* Inputs */
+
+.loginBox input{
+padding:10px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:14px;
+}
+
+/* Button */
+
+.loginBox button{
+padding:10px;
+border:none;
+background:#007bff;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-size:15px;
+}
+
+.loginBox button:hover{
+background:#0056b3;
+}
+
+/* Error Message */
+
+#errorMsg{
+color:red;
+text-align:center;
+margin-top:10px;
+}
