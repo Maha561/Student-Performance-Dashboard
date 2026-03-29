@@ -9,32 +9,55 @@
 
 <link rel="stylesheet" href="style.css">
 
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
 <body>
 
-<h1>Student Performance Dashboard</h1>
+<!-- 🔷 NAVBAR -->
+<div class="navbar">
 
-<!-- Top Buttons -->
+    <h2 class="logo">Student Dashboard</h2>
 
-<div style="margin-bottom:20px;">
-    <button id="lightBtn">Light</button>
-    <button id="darkBtn">Dark</button>
-    <button onclick="logout()">Logout</button>
+    <div class="nav-actions">
+
+        <!-- Search -->
+        <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchStudent()">
+
+        <!-- Filter -->
+        <select id="deptFilter" onchange="filterDepartment()">
+            <option value="All">All Dept</option>
+            <option value="CSE">CSE</option>
+            <option value="IT">IT</option>
+            <option value="ECE">ECE</option>
+        </select>
+
+        <!-- Add -->
+        <a href="add.html">
+            <button>Add</button>
+        </a>
+
+        <!-- Theme -->
+        <select id="themeSelect">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
+
+        <!-- Logout -->
+        <button onclick="logout()">Logout</button>
+
+    </div>
+
 </div>
 
-<!-- Add Student Button -->
+<!-- 🔷 TITLE -->
+<h1 style="text-align:center; margin-top:20px;">
+    Student Performance Dashboard
+</h1>
 
-<a href="add.html">
-    <button>Add Student</button>
-</a>
-
-<br><br>
-
-<!-- Dashboard -->
-
+<!-- 🔷 DASHBOARD -->
 <h2>Dashboard</h2>
 
 <div class="dashboard">
@@ -56,35 +79,7 @@
 
 </div>
 
-<!-- Filter -->
-
-<center>
-
-<label><b>Filter by Department</b></label>
-
-<select id="deptFilter" onchange="filterDepartment()">
-<option value="All">All</option>
-<option value="CSE">CSE</option>
-<option value="IT">IT</option>
-<option value="ECE">ECE</option>
-</select>
-
-</center>
-
-<br>
-
-<!-- Search -->
-
-<div class="searchBox">
-
-<label><b>Search Student</b></label>
-
-<input type="text" id="searchInput" placeholder="Enter name" onkeyup="searchStudent()">
-
-</div>
-
-<!-- Table -->
-
+<!-- 🔷 TABLE -->
 <h2>Student List</h2>
 
 <table>
@@ -104,9 +99,12 @@
 
 </table>
 
-<!-- Chart Section -->
-<h2>Analytics</h2>
-<canvas id="myChart"></canvas>
+<!-- 🔷 CHART -->
+<h2 style="text-align:center;">Analytics</h2>
+
+<div class="chartBox">
+    <canvas id="myChart"></canvas>
+</div>
 
 <script src="script.js"></script>
 

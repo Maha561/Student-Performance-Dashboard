@@ -6,14 +6,20 @@ if(isLoggedIn !== "true"){
     window.location.href = "login.html";
 }
 
+// ================= THEME LOAD =================
+
+const savedTheme = localStorage.getItem("theme");
+
+if(savedTheme === "dark"){
+    document.body.classList.add("dark-mode");
+}
+
 // ================= VARIABLES =================
 
 let students = [];
-
 let total = 0;
 let passed = 0;
 let failed = 0;
-
 let myChart;
 
 const form = document.getElementById("studentForm");
@@ -27,28 +33,31 @@ if(savedStudents){
     students = savedStudents;
 }
 
-// ================= WINDOW LOAD (IMPORTANT FIX) =================
+// ================= PAGE LOAD =================
 
 window.onload = function(){
-
     renderTable();
     updateDashboard();
     loadChart();
-
 };
 
-// ================= DARK MODE =================
+// ================= THEME DROPDOWN =================
 
-let darkBtn = document.getElementById("darkBtn");
-let lightBtn = document.getElementById("lightBtn");
+const themeSelect = document.getElementById("themeSelect");
 
-darkBtn.addEventListener("click", function(){
-    document.body.classList.add("dark-mode");
-});
+if(themeSelect){
+    themeSelect.addEventListener("change", function(){
 
-lightBtn.addEventListener("click", function(){
-    document.body.classList.remove("dark-mode");
-});
+        if(this.value === "dark"){
+            document.body.classList.add("dark-mode");
+            localStorage.setItem("theme", "dark");
+        }else{
+            document.body.classList.remove("dark-mode");
+            localStorage.setItem("theme", "light");
+        }
+
+    });
+}
 
 // ================= ADD STUDENT =================
 

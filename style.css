@@ -1,235 +1,154 @@
+/* ================= GENERAL ================= */
+
 body{
-font-family: Arial;
-margin:30px;
-background:#f9f9f9;
-color:black;
+    font-family: Arial;
+    margin:0;
+    background:#f9f9f9;
+    color:black;
 }
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+    background:#333;
+    color:white;
+}
+
+.logo{
+    margin:0;
+}
+
+.nav-actions{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.nav-actions input,
+.nav-actions select{
+    padding:6px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+.nav-actions button{
+    background:red;
+    color:white;
+    border:none;
+    padding:6px 12px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.nav-actions button:hover{
+    background:darkred;
+}
+
+/* ================= HEADINGS ================= */
 
 h1{
-text-align:center;
-margin-bottom:30px;
+    text-align:center;
+    margin:20px 0;
 }
 
-/* Dashboard */
+h2{
+    margin-left:20px;
+}
+
+/* ================= DASHBOARD ================= */
 
 .dashboard{
-display:flex;
-gap:20px;
-margin-bottom:30px;
+    display:flex;
+    gap:20px;
+    margin:20px;
 }
 
 .card{
-background:white;
-padding:20px;
-border-radius:10px;
-width:200px;
-text-align:center;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    width:200px;
+    text-align:center;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* Form */
-
-form{
-margin-bottom:30px;
-display:flex;
-flex-direction:column;
-width:300px;
-gap:10px;
-}
-
-input{
-padding:8px;
-}
-
-/* Table */
+/* ================= TABLE ================= */
 
 table{
-width:100%;
-border-collapse:collapse;
-background:white;
+    width:95%;
+    margin:20px auto;
+    border-collapse:collapse;
+    background:white;
 }
 
 th,td{
-padding:10px;
-border:1px solid #ccc;
-text-align:center;
+    padding:10px;
+    border:1px solid #ccc;
+    text-align:center;
 }
 
 th{
-background:#333;
-color:white;
+    background:#333;
+    color:white;
 }
 
-/* Buttons */
+/* ================= BUTTON ================= */
 
 button{
-padding:8px;
-border:none;
-background:red;
-color:white;
-border-radius:5px;
-cursor:pointer;
+    padding:6px 10px;
+    border:none;
+    background:red;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
 }
 
 button:hover{
-background:darkred;
+    background:darkred;
 }
 
-/* Search */
+/* ================= CHART ================= */
 
-.searchBox{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:10px;
-margin:20px 0;
-}
-
-/* Dark Mode */
-
-.dark-mode{
-background:#1c1c1c;
-color:white;
-}
-
-.dark-mode .card{
-background:#2c2c2c;
-}
-
-.dark-mode table{
-background:#2c2c2c;
-}
-
-.dark-mode th{
-background:black;
-}
-
-.loginBox{
-width:300px;
-margin:100px auto;
-padding:30px;
-background:white;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.2);
-display:flex;
-flex-direction:column;
-gap:10px;
-}
-
-.loginBox h2{
-text-align:center;
-}
-
-#errorMsg{
-color:red;
-text-align:center;
-}
-/* Login Page */
-
-.loginBox{
-width:320px;
-margin:100px auto;
-padding:30px;
-background:white;
-border-radius:12px;
-box-shadow:0 4px 10px rgba(0,0,0,0.15);
-display:flex;
-flex-direction:column;
-gap:12px;
-}
-
-.loginBox h2{
-text-align:center;
-margin-bottom:10px;
-}
-
-/* Inputs */
-
-.loginBox input{
-padding:10px;
-border:1px solid #ccc;
-border-radius:6px;
-font-size:14px;
-}
-
-/* Button */
-
-.loginBox button{
-padding:10px;
-border:none;
-background:#007bff;
-color:white;
-border-radius:6px;
-cursor:pointer;
-font-size:15px;
-}
-
-.loginBox button:hover{
-background:#0056b3;
-}
-
-/* Error Message */
-
-#errorMsg{
-color:red;
-text-align:center;
-margin-top:10px;
-}
-/* Login Page */
-
-.loginBox{
-width:320px;
-margin:100px auto;
-padding:30px;
-background:white;
-border-radius:12px;
-box-shadow:0 4px 10px rgba(0,0,0,0.15);
-display:flex;
-flex-direction:column;
-gap:12px;
-}
-
-.loginBox h2{
-text-align:center;
-margin-bottom:10px;
-}
-
-/* Inputs */
-
-.loginBox input{
-padding:10px;
-border:1px solid #ccc;
-border-radius:6px;
-font-size:14px;
-}
-
-/* Button */
-
-.loginBox button{
-padding:10px;
-border:none;
-background:#007bff;
-color:white;
-border-radius:6px;
-cursor:pointer;
-font-size:15px;
-}
-
-.loginBox button:hover{
-background:#0056b3;
-}
-
-/* Error Message */
-
-#errorMsg{
-color:red;
-text-align:center;
-margin-top:10px;
+.chartBox{
+    display:flex;
+    justify-content:center;
+    margin-top:20px;
 }
 
 #myChart{
-    width: 300px !important;
-    height: 300px !important;
-    margin: auto;
-    display: block;
+    width:350px !important;
+    height:350px !important;
+}
+
+/* ================= DARK MODE ================= */
+
+.dark-mode{
+    background:#1c1c1c;
+    color:white;
+}
+
+.dark-mode .navbar{
+    background:#000;
+}
+
+.dark-mode .card{
+    background:#2c2c2c;
+    color:white;
+}
+
+.dark-mode table{
+    background:#2c2c2c;
+    color:white;
+}
+
+.dark-mode th{
+    background:#000;
+}
+
+.dark-mode td{
+    color:white;
 }
