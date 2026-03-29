@@ -53,7 +53,7 @@ script.js
 
 👨‍💻 About Me
 
-Hi, I'm XXX, a 3rd-year Computer Science student at XYZ Engineering College, passionate about building user-friendly and impactful web applications.
+Hi, I'm Mahalakshmi A, a 3rd-year Computer Science student at Jeppiaar Engineering College, passionate about building user-friendly and impactful web applications.
 
 I'm currently focused on Frontend Web Development, working with HTML, CSS, JavaScript, and React, and continuously improving my problem-solving skills through Data Structures & Algorithms in Java.
 
