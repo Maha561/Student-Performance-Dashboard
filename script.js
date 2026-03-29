@@ -14,6 +14,8 @@ let total = 0;
 let passed = 0;
 let failed = 0;
 
+let myChart;
+
 const form = document.getElementById("studentForm");
 const table = document.getElementById("studentTable");
 
@@ -23,9 +25,17 @@ const savedStudents = JSON.parse(localStorage.getItem("students"));
 
 if(savedStudents){
     students = savedStudents;
+}
+
+// ================= WINDOW LOAD (IMPORTANT FIX) =================
+
+window.onload = function(){
+
     renderTable();
     updateDashboard();
-}
+    loadChart();
+
+};
 
 // ================= DARK MODE =================
 
@@ -42,6 +52,7 @@ lightBtn.addEventListener("click", function(){
 
 // ================= ADD STUDENT =================
 
+if(form){
 form.addEventListener("submit", function(event){
 
     event.preventDefault();
@@ -60,13 +71,17 @@ form.addEventListener("submit", function(event){
 
     renderTable();
     updateDashboard();
+    loadChart();
 
     form.reset();
 });
+}
 
 // ================= RENDER TABLE =================
 
 function renderTable(){
+
+    if(!table) return;
 
     table.innerHTML = "";
 
@@ -96,7 +111,6 @@ function updateDashboard(){
     total = students.length;
 
     passed = students.filter(s => s.status === "Pass").length;
-
     failed = students.filter(s => s.status === "Fail").length;
 
     document.getElementById("totalStudents").textContent = total;
@@ -114,6 +128,7 @@ function deleteRow(index){
 
     renderTable();
     updateDashboard();
+    loadChart();
 }
 
 // ================= FILTER =================
@@ -163,4 +178,32 @@ function searchStudent(){
 function logout(){
     localStorage.removeItem("loggedIn");
     window.location.href = "login.html";
+}
+
+// ================= CHART =================
+
+function loadChart(){
+
+    const canvas = document.getElementById("myChart");
+
+    if(!canvas) return;
+
+    let pass = students.filter(s => s.status === "Pass").length;
+    let fail = students.filter(s => s.status === "Fail").length;
+
+    if(myChart){
+        myChart.destroy();
+    }
+
+    myChart = new Chart(canvas, {
+        type: "pie",
+        data: {
+            labels: ["Pass", "Fail"],
+            datasets: [{
+                data: [pass, fail],
+                backgroundColor: ["green", "red"]
+            }]
+        }
+    });
+
 }

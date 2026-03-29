@@ -226,3 +226,10 @@ color:red;
 text-align:center;
 margin-top:10px;
 }
+
+#myChart{
+    width: 300px !important;
+    height: 300px !important;
+    margin: auto;
+    display: block;
+}
