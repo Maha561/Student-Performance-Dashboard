@@ -27,17 +27,13 @@ This project allows users to add, view, filter, and analyze student data with a 
 - JavaScript
 - Chart.js
 
---------------------------------------------------
 
-📸 Demo
-
-(Add your screenshots here after hosting)
 
 --------------------------------------------------
 
 🌐 Live Demo
 
-(Add your deployed link here)
+https://maha561.github.io/Student-Performance-Dashboard/
 
 --------------------------------------------------
 
